@@ -2,7 +2,13 @@ project(
   'pl',
   'c',
   version: '0.1',
-  default_options: ['warning_level=3', 'c_args=-Wall -g', 'c_std=c99'],
+  default_options: [
+    'warning_level=everything',
+    'werror=true',
+    'debug=true',
+    'optimization=3',
+    'c_std=c99',
+  ],
 )
 
 src_dir = 'src'
