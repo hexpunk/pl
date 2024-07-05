@@ -1,8 +1,8 @@
-#include "std_list.h"
+#include "list.h"
 
-StdList *stdListCreate()
+List *listCreate()
 {
-  StdList *newList = malloc(sizeof(StdList));
+  List *newList = malloc(sizeof(List));
   if (!newList)
   {
     return NULL;
@@ -14,21 +14,21 @@ StdList *stdListCreate()
   return newList;
 }
 
-void stdListDestroy(StdList *list)
+void listDestroy(List *list)
 {
   while (list->head != NULL)
   {
-    stdListPop(list);
+    listPop(list);
   }
 
   free(list);
 }
 
-bool stdListPush(StdList *list, void *element)
+bool listPush(List *list, void *element)
 {
-  StdListElement *oldHead = list->head;
+  ListElement *oldHead = list->head;
 
-  StdListElement *newHead = malloc(sizeof(StdListElement));
+  ListElement *newHead = malloc(sizeof(ListElement));
   if (!newHead)
   {
     return false;
@@ -43,9 +43,9 @@ bool stdListPush(StdList *list, void *element)
   return true;
 }
 
-void *stdListPop(StdList *list)
+void *listPop(List *list)
 {
-  StdListElement *oldHead = list->head;
+  ListElement *oldHead = list->head;
   void *value = oldHead->value;
 
   list->head = oldHead->next;
