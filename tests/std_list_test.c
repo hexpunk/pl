@@ -9,10 +9,18 @@ typedef struct IntHolder
 static void basicPushPopTest(void)
 {
   StdList *list = stdListCreate();
+  g_assert_nonnull(list);
 
-  stdListPush(list, &(IntHolder){.value = 1});
-  stdListPush(list, &(IntHolder){.value = 2});
-  stdListPush(list, &(IntHolder){.value = 3});
+  bool success;
+
+  success = stdListPush(list, &(IntHolder){.value = 1});
+  g_assert_true(success);
+
+  success = stdListPush(list, &(IntHolder){.value = 2});
+  g_assert_true(success);
+
+  success = stdListPush(list, &(IntHolder){.value = 3});
+  g_assert_true(success);
 
   IntHolder *head = stdListPop(list);
   g_assert_cmpint(head->value, ==, 3);
