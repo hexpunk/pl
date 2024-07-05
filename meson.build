@@ -28,12 +28,19 @@ executable(
 
 glib_dep = dependency('glib-2.0', required: true)
 
-list_test_exe = executable(
+test(
   'list_test',
-  test_dir / 'list_test.c',
-  include_directories: include_directories(src_dir, test_dir),
-  dependencies: [glib_dep],
-  link_with: lib_list,
+  executable(
+    'list_test',
+    test_dir / 'list_test.c',
+    include_directories: include_directories(src_dir, test_dir),
+    dependencies: [glib_dep],
+    link_with: lib_list,
+  ),
+  env: [
+    'G_TEST_SRCDIR=@0@'.format(meson.current_source_dir()),
+    'G_TEST_BUILDDIR=@0@'.format(meson.current_build_dir()),
+  ],
+  protocol: 'tap',
+  verbose: true,
 )
-
-test('list_test', list_test_exe, verbose: true)

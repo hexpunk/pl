@@ -40,10 +40,18 @@ static void basicPushPopTest(void)
 static void memoryCleanupTest(void)
 {
   List *list = listCreate();
+  g_assert_nonnull(list);
 
-  listPush(list, &(IntHolder){.value = 1});
-  listPush(list, &(IntHolder){.value = 2});
-  listPush(list, &(IntHolder){.value = 3});
+  bool success;
+
+  success = listPush(list, &(IntHolder){.value = 1});
+  g_assert_true(success);
+
+  success = listPush(list, &(IntHolder){.value = 2});
+  g_assert_true(success);
+
+  success = listPush(list, &(IntHolder){.value = 3});
+  g_assert_true(success);
 
   listDestroy(list);
 }
@@ -51,7 +59,7 @@ static void memoryCleanupTest(void)
 int main(int argc, char *argv[])
 {
   g_test_init(&argc, &argv, NULL);
-  g_test_add_func("/list/basic_push_pop_test", basicPushPopTest);
-  g_test_add_func("/list/memory_cleanup_test", memoryCleanupTest);
+  g_test_add_func("/list_test/basic_push_pop_test", basicPushPopTest);
+  g_test_add_func("/list_test/memory_cleanup_test", memoryCleanupTest);
   return g_test_run();
 }
