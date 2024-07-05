@@ -36,4 +36,4 @@ list_test_exe = executable(
   link_with: lib_list,
 )
 
-test('list_test', list_test_exe)
+test('list_test', list_test_exe, verbose: true)
